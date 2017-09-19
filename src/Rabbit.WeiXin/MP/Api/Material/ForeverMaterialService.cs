@@ -4,6 +4,7 @@ using Rabbit.WeiXin.Utility;
 using Rabbit.WeiXin.Utility.Extensions;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Rabbit.WeiXin.MP.Api.Material
 {
@@ -278,34 +279,6 @@ namespace Rabbit.WeiXin.MP.Api.Material
     public class GetMaterialListResultModel
     {
         /// <summary>
-        /// 素材列表项。
-        /// </summary>
-        public sealed class MaterialListItem
-        {
-            /// <summary>
-            /// 素材Id。
-            /// </summary>
-            [JsonProperty("media_id")]
-            public string MediaId { get; set; }
-
-            /// <summary>
-            /// 素材名称。
-            /// </summary>
-            public string Name { get; set; }
-
-            /// <summary>
-            /// 最后更新时间。
-            /// </summary>
-            [JsonProperty("update_time")]
-            public long LastUpdateTime { get; set; }
-
-            /// <summary>
-            /// 素材url。
-            /// </summary>
-            public string Url { get; set; }
-        }
-
-        /// <summary>
         /// 该类型的素材的总数
         /// </summary>
         [JsonProperty("total_count")]
@@ -322,6 +295,104 @@ namespace Rabbit.WeiXin.MP.Api.Material
         /// </summary>
         [JsonProperty("item")]
         public MaterialListItem[] Items { get; set; }
+    }
+
+    /// <summary>
+    /// 素材列表项。
+    /// </summary>
+    public sealed class MaterialListItem
+    {
+        /// <summary>
+        /// 素材Id。
+        /// </summary>
+        [JsonProperty("media_id")]
+        public string MediaId { get; set; }
+
+        /// <summary>
+        /// 素材名称。
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 图文素材内容
+        /// </summary>
+        [JsonProperty("content")]
+        public NewContent NewsContent { get; set; }
+
+        /// <summary>
+        /// 最后更新时间。
+        /// </summary>
+        [JsonProperty("update_time")]
+        public long LastUpdateTime { get; set; }
+
+        /// <summary>
+        /// 素材url。
+        /// </summary>
+        public string Url { get; set; }
+    }
+    /// <summary>
+    /// 图文素材
+    /// </summary>
+    public class NewContent
+    {
+        /// <summary>
+        /// 图文素材明细
+        /// </summary>
+        [JsonProperty("news_item")]
+        public NewsListItem[] NewsItem { get; set; }
+    }
+    /// <summary>
+    /// 图文素材明细
+    /// </summary>
+    public class NewsListItem
+    {
+        /// <summary>
+        /// 标题
+        /// </summary>
+        [JsonProperty("title")]
+        public string Title { get; set; }
+
+        /// <summary>
+        /// 缩略图
+        /// </summary>
+        [JsonProperty("thumb_media_id")]
+        public string ThumbMediaId { get; set; }
+
+        /// <summary>
+        /// 是否显示封面
+        /// </summary>
+        [JsonProperty("show_cover_pic")]
+        public bool ShowCoverPic { get; set; }
+
+        /// <summary>
+        /// 作者
+        /// </summary>
+        [JsonProperty("author")]
+        public string Author { get; set; }
+
+        /// <summary>
+        /// 摘要
+        /// </summary>
+        [JsonProperty("digest")]
+        public string Digest { get; set; }
+
+        /// <summary>
+        /// 内容
+        /// </summary>
+        [JsonProperty("content")]
+        public string Content { get; set; }
+
+        /// <summary>
+        /// 跳转链接
+        /// </summary>
+        [JsonProperty("url")]
+        public string Url { get; set; }
+
+        /// <summary>
+        /// 原文链接
+        /// </summary>
+        [JsonProperty("content_source_url")]
+        public string ContentSourceUrl { get; set; }
     }
 
     /// <summary>

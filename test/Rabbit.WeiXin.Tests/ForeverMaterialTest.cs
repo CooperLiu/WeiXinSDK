@@ -2,6 +2,7 @@
 using Rabbit.WeiXin.MP.Api.Material;
 using Rabbit.WeiXin.Tests.Utility;
 using System;
+using Newtonsoft.Json;
 
 namespace Rabbit.WeiXin.Tests
 {
@@ -135,6 +136,53 @@ namespace Rabbit.WeiXin.Tests
             var list = _materialService.GetList(new GetMaterialListFilter { Take = 20, Skip = 0, Type = MaterialType.Image });
 
             Assert.True(list.TotalCount > 0);
+        }
+
+        [Fact]
+        public void ResultDeserialization()
+        {
+            var result = @"{
+  'total_count': 100,
+  'item_count': 1,
+  'item': [{
+      'media_id': 123123,
+      'content': {
+          'news_item': [{
+              'title': '123',
+              'thumb_media_id': 123123,
+              'show_cover_pic': 1,
+              'author': '12',
+              'digest': 'DIGEST',
+              'content': 'DIGEST',
+              'url': 'http://baidu.com',
+              'content_source_url': ''
+          }
+          ]
+       },
+       'update_time': 12334444555
+   }
+ ]
+}";
+
+            var output = JsonConvert.DeserializeObject<GetMaterialListResultModel>(result);
+
+            Assert.NotNull(output);
+
+
+            var result1 = @"{
+  'total_count': 100,
+  'item_count': 1,
+  'item': [{
+      'media_id':1231,
+      'name': '11',
+      'update_time': 123123213,
+      'url':'asdfsdfsdf'
+  }
+  ]
+}";
+            var output1 = JsonConvert.DeserializeObject<GetMaterialListResultModel>(result1);
+
+            Assert.NotNull(output1);
         }
 
         [Fact]
