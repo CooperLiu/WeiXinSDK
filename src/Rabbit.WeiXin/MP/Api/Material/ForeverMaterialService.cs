@@ -393,6 +393,24 @@ namespace Rabbit.WeiXin.MP.Api.Material
         /// </summary>
         [JsonProperty("content_source_url")]
         public string ContentSourceUrl { get; set; }
+
+        /// <summary>
+        /// 缩略图地址
+        /// </summary>
+        [JsonProperty("thumb_url")]
+        public string ThumbUrl { get; set; }
+
+        /// <summary>
+        /// 是否开启评论
+        /// </summary>
+        [JsonProperty("need_open_comment")]
+        public bool NeedOpenComment { get; set; }
+
+        /// <summary>
+        /// 是否只有关注者才能评论
+        /// </summary>
+        [JsonProperty("only_fans_can_comment")]
+        public bool OnlyFansCanComment { get; set; }
     }
 
     /// <summary>
