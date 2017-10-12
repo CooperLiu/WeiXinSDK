@@ -151,6 +151,17 @@ namespace Rabbit.WeiXin.MP.Api.CustomMenu
         }
 
         /// <summary>
+        /// 设置自定义菜单
+        /// </summary>
+        /// <param name="jsonData"></param>
+        public void Set(string jsonData)
+        {
+            var url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=" + _accountModel.GetAccessToken();
+
+            WeiXinHttpHelper.Post(url,jsonData);
+        }
+
+        /// <summary>
         /// 获取自定义菜单信息。
         /// </summary>
         /// <returns>自定义菜单数组。</returns>
@@ -168,11 +179,24 @@ namespace Rabbit.WeiXin.MP.Api.CustomMenu
         /// <returns>自定义菜单信息。</returns>
         public CustomMenuModel Get()
         {
+            var jsonData = GetMenuJsonData();
+
+            return GetByJson(jsonData);
+        }
+
+        /// <summary>
+        /// 获取菜单Json原始数据
+        /// </summary>
+        /// <returns></returns>
+        public JToken GetMenuJsonData()
+        {
             var url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=" + _accountModel.GetAccessToken();
 
             var content = WeiXinHttpHelper.GetString(url);
-            return GetByJson(content);
+
+            return JToken.Parse(content);
         }
+
 
         /// <summary>
         /// 获取指定用户的自定义菜单信息。
@@ -220,14 +244,25 @@ namespace Rabbit.WeiXin.MP.Api.CustomMenu
 
         #region Private Method
 
-        private static CustomMenuModel GetByJson(string content)
+        /// <summary>
+        /// 解析菜单Json数据
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public CustomMenuModel GetByJson(string content)
         {
             var data = JObject.Parse(content);
+            return GetByJson(data);
+        }
+
+        private static CustomMenuModel GetByJson(JToken json)
+        {
             return new CustomMenuModel
             {
-                DefaultMenu = GetItem(data["menu"]),
-                ConditionalMenus = (data["conditionalmenu"] as JArray)?.Select(GetItem).ToArray()
+                DefaultMenu = GetItem(json["menu"]),
+                ConditionalMenus = (json["conditionalmenu"] as JArray)?.Select(GetItem).ToArray()
             };
+
         }
 
         private static CustomMenuItemModel GetItem(JToken token)
