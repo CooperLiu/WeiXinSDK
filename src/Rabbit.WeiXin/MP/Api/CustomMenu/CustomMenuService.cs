@@ -58,6 +58,13 @@ namespace Rabbit.WeiXin.MP.Api.CustomMenu
         JToken GetMenuJsonData();
 
         /// <summary>
+        /// 从Json获取菜单对象
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        CustomMenuModel GetByJson(string content);
+
+        /// <summary>
         /// 获取指定用户的自定义菜单信息。
         /// </summary>
         /// <param name="openIdOrWeChatAccount">用户的Id或是微信账号。</param>
