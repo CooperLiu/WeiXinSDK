@@ -33,6 +33,12 @@ namespace Rabbit.WeiXin.MP.Api.CustomMenu
         int? Set(CustomMenuButtonBase[] menus, CustomMeunMatchRule matchRule);
 
         /// <summary>
+        /// 设置自定义菜单
+        /// </summary>
+        /// <param name="jsonData"></param>
+        void Set(string jsonData);
+
+        /// <summary>
         /// 获取自定义菜单信息。
         /// </summary>
         /// <returns>自定义菜单数组。</returns>
@@ -44,6 +50,12 @@ namespace Rabbit.WeiXin.MP.Api.CustomMenu
         /// </summary>
         /// <returns>自定义菜单信息。</returns>
         CustomMenuModel Get();
+
+        /// <summary>
+        /// 获取菜单Json原始数据
+        /// </summary>
+        /// <returns></returns>
+        JToken GetMenuJsonData();
 
         /// <summary>
         /// 获取指定用户的自定义菜单信息。
