@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Rabbit.WeiXin.Utility
 {
@@ -95,7 +96,7 @@ namespace Rabbit.WeiXin.Utility
                 using (var responseStream = response.GetResponseStream())
                 {
                     responseHeaders = response.Headers;
-                    return responseStream.ReadBytes(response.ContentLength);
+                    return ReadFully(responseStream);
                 }
             }
 #else
@@ -105,7 +106,7 @@ namespace Rabbit.WeiXin.Utility
                  {
                      using (var responseStream = response.GetResponseStream())
                      {
-                         return new KeyValuePair<byte[], WebHeaderCollection>(responseStream.ReadBytes(response.ContentLength), response.Headers);
+                         return new KeyValuePair<byte[], WebHeaderCollection>(ReadFully(responseStream), response.Headers);
                      }
                  }
              }).Result;
@@ -128,7 +129,7 @@ namespace Rabbit.WeiXin.Utility
                 {
                     using (var responseStream = response.GetResponseStream())
                     {
-                        return responseStream.ReadBytes(response.ContentLength);
+                        return ReadFully(responseStream);
                     }
                 }
             }
@@ -142,12 +143,27 @@ namespace Rabbit.WeiXin.Utility
                     {
                         using (var responseStream = response.GetResponseStream())
                         {
-                            return responseStream.ReadBytes(response.ContentLength);
+                            return ReadFully(responseStream);
                         }
                     }
                 }
             }).Result;
 #endif
+        }
+
+        private static byte[] ReadFully(Stream stream)
+        {
+            byte[] buffer = new byte[128];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                while (true)
+                {
+                    int read = stream.Read(buffer, 0, buffer.Length);
+                    if (read <= 0)
+                        return ms.ToArray();
+                    ms.Write(buffer, 0, read);
+                }
+            }
         }
     }
 }
