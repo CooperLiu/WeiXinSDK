@@ -5,7 +5,7 @@
     <Copyright>© RabbitHub. All rights reserved.</Copyright>
     <VersionPrefix>0.3-beta1</VersionPrefix>
     <Authors>majian</Authors>
-    <TargetFrameworks>net40;net45;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>net40;net45;netstandard2.0</TargetFrameworks>
     <AssemblyName>Rabbit.WeiXin.MvcExtension</AssemblyName>
     <PackageId>Rabbit.WeiXin.MvcExtension</PackageId>
     <PackageTags> RabbitHub;WeiXinSDK;Rabbit.WeiXin</PackageTags>
@@ -22,14 +22,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Rabbit.WeiXin\Rabbit.WeiXin.csproj" />
   </ItemGroup>
-
   <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="4.0.30506.0" />
     <Reference Include="System" />
     <Reference Include="System.Web" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
-
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="4.0.30506.0" />
     <Reference Include="System" />
@@ -37,25 +35,21 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net40' ">
-    <DefineConstants>$(DefineConstants);NET</DefineConstants>
-  </PropertyGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.0.3" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net40'">
     <DefineConstants>TRACE;DEBUG;NET40;NET</DefineConstants>
     <DocumentationFile>bin\Debug\net40\Rabbit.WeiXin.xml</DocumentationFile>
   </PropertyGroup>
-
+  
   <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
     <DefineConstants>TRACE;DEBUG;NET45;NET</DefineConstants>
     <DocumentationFile>bin\Debug\net45\Rabbit.WeiXin.xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
-    <DocumentationFile>bin\Debug\netstandard1.6\Rabbit.WeiXin.xml</DocumentationFile>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <DocumentationFile>bin\Debug\netstandard2.0\Rabbit.WeiXin.xml</DocumentationFile>
   </PropertyGroup>
 </Project>

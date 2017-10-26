@@ -6,7 +6,7 @@
     <Copyright>© RabbitHub. All rights reserved.</Copyright>
     <VersionPrefix>0.3</VersionPrefix>
     <Authors>Cooperliu</Authors>
-    <TargetFrameworks>net40;net45;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>net40;net45;netstandard2.0</TargetFrameworks>
     <AssemblyName>Rabbit.WeiXin</AssemblyName>
     <PackageId>Rabbit.WeiXin</PackageId>
     <PackageTags> RabbitHub;WeiXinSDK;Rabbit.WeiXin</PackageTags>
@@ -41,17 +41,17 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
-    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="1.1.1" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.0.0" />
     <PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
     <PackageReference Include="System.Collections.NonGeneric" Version="4.3.0" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.3.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
     <PackageReference Include="System.Net.Requests" Version="4.3.0" />
     <PackageReference Include="System.Net.WebHeaderCollection" Version="4.3.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
-    <PackageReference Include="System.Text.Encodings.Web" Version="4.3.0" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="4.4.0" />
     <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
@@ -66,7 +66,7 @@
     <DocumentationFile>bin\Debug\net45\Rabbit.WeiXin.xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
-    <DocumentationFile>bin\Debug\netstandard1.6\Rabbit.WeiXin.xml</DocumentationFile>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <DocumentationFile>bin\Debug\netstandard2.0\Rabbit.WeiXin.xml</DocumentationFile>
   </PropertyGroup>
 </Project>

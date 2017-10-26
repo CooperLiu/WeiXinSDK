@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26401.1
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0DB7779A-D1BA-4E91-AA87-47B5E83ECE4B}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rabbit.WeiXin.Tests", "test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{C31BB725-27AA-4E1B-BA23-181DABBE6D77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rabbit.WeiXin.AspNetCoreSample", "sample\Rabbit.WeiXin.AspNetCoreSample\Rabbit.WeiXin.AspNetCoreSample.csproj", "{83C4DECF-4413-417B-BDF1-B0D8A0CA710B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rabbit.WeiXin.AspNetCoreSample", "sample\Rabbit.WeiXin.AspNetCoreSample\Rabbit.WeiXin.AspNetCoreSample.csproj", "{83C4DECF-4413-417B-BDF1-B0D8A0CA710B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,5 +48,8 @@ Global
 		{1C5AE5A8-AC04-4284-98BD-0BD741D4CCFC} = {0DB7779A-D1BA-4E91-AA87-47B5E83ECE4B}
 		{612F2AA4-BC2F-442C-B151-560D75F30A67} = {5484D81C-A46E-4191-BB36-1C0C4F0B8121}
 		{83C4DECF-4413-417B-BDF1-B0D8A0CA710B} = {C31BB725-27AA-4E1B-BA23-181DABBE6D77}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {154064F2-6226-450C-9EC2-A4B0F4E5CBCA}
 	EndGlobalSection
 EndGlobal
