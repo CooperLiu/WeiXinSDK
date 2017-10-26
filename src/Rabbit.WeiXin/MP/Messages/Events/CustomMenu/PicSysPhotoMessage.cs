@@ -8,7 +8,7 @@
         /// <summary>
         /// 发送的图片数量。
         /// </summary>
-        public ushort Count { get; set; }
+        public short Count { get; set; }
 
         /// <summary>
         /// 图片Md5数组。

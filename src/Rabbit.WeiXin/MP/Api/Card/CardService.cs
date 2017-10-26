@@ -102,7 +102,7 @@ namespace Rabbit.WeiXin.MP.Api.Card
         /// <param name="status">支持开发者拉出指定状态的卡券列表，例：仅拉出通过审核的卡券。</param>
         /// <returns>卡券信息。</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="take"/> 等于0或者大于50。</exception>
-        public CardListResult GetCardList(uint skip, ushort take, CardStatusEnum[] status = null)
+        public CardListResult GetCardList(int skip, short take, CardStatusEnum[] status = null)
         {
             if (take > 50 || take == 0)
                 throw new ArgumentOutOfRangeException("take", "查询的数量必须大于0小等于50。");
@@ -147,8 +147,8 @@ namespace Rabbit.WeiXin.MP.Api.Card
                 case CardType.Cash:
                     card = new CashCardModel
                     {
-                        LeastCost = contentObj.Value<uint>("least_cost"),
-                        ReduceCost = contentObj.Value<uint>("reduce_cost")
+                        LeastCost = contentObj.Value<int>("least_cost"),
+                        ReduceCost = contentObj.Value<int>("reduce_cost")
                     };
                     break;
 
@@ -162,7 +162,7 @@ namespace Rabbit.WeiXin.MP.Api.Card
                 case CardType.Discount:
                     card = new DiscountCardModel
                     {
-                        Discount = contentObj.Value<ushort>("discount")
+                        Discount = contentObj.Value<short>("discount")
                     };
                     break;
 
@@ -197,7 +197,7 @@ namespace Rabbit.WeiXin.MP.Api.Card
                 Description = baseInfoObj.Value<string>("description"),
                 Product = new CardBaseInfoBase.ProductInfo
                 {
-                    Quantity = baseInfoObj.SelectToken("sku.quantity").Value<uint>()
+                    Quantity = baseInfoObj.SelectToken("sku.quantity").Value<int>()
                 },
                 UseTime = GetUseTime(baseInfoObj["date_info"]),
                 UseCustomCode = baseInfoObj.Value<bool>("use_custom_code"),
@@ -211,7 +211,7 @@ namespace Rabbit.WeiXin.MP.Api.Card
                 PromotionUrlName = baseInfoObj.Value<string>("promotion_url_name"),
                 PromotionUrl = baseInfoObj.Value<string>("promotion_url"),
                 PromotionUrlSubTitle = baseInfoObj.Value<string>("promotion_url_sub_title"),
-                GetLimit = baseInfoObj.Value<uint>("get_limit"),
+                GetLimit = baseInfoObj.Value<int>("get_limit"),
                 AllowShare = baseInfoObj.Value<bool>("can_share"),
                 AllowGive = baseInfoObj.Value<bool>("can_give_friend"),
                 Status = GetStatusByString(baseInfoObj.Value<string>("status"))
@@ -284,9 +284,9 @@ namespace Rabbit.WeiXin.MP.Api.Card
             var card = obj["card"];
             return new SearchCodeResult
             {
-                BeginTime = DateTimeHelper.GetTimeByTimeStamp(card.Value<ulong>("begin_time")),
+                BeginTime = DateTimeHelper.GetTimeByTimeStamp(card.Value<long>("begin_time")),
                 CardId = card.Value<string>("card_id"),
-                EndTime = DateTimeHelper.GetTimeByTimeStamp(card.Value<ulong>("end_time")),
+                EndTime = DateTimeHelper.GetTimeByTimeStamp(card.Value<long>("end_time")),
                 OpenId = obj.Value<string>("openid")
             };
         }
@@ -324,7 +324,7 @@ namespace Rabbit.WeiXin.MP.Api.Card
         /// <param name="increaseValue">增加的值。</param>
         /// <param name="reduceValue">减少的值。</param>
         /// <remarks>调用修改库存接口增减某张卡券的库存。</remarks>
-        public void UpdateStock(string cardId, uint? increaseValue, uint? reduceValue)
+        public void UpdateStock(string cardId, int? increaseValue, int? reduceValue)
         {
             var url = "https://api.weixin.qq.com/card/modifystock?access_token=" + _accountModel.GetAccessToken();
 
@@ -487,15 +487,15 @@ namespace Rabbit.WeiXin.MP.Api.Card
                 case CardUseTimeType.FixedLong:
                     return new CardBaseInfoBase.UseTimeFixedLongInfo
                     {
-                        FixedBeginTerm = token.Value<uint>("fixed_begin_term"),
-                        FixedTerm = token.Value<uint>("fixed_term")
+                        FixedBeginTerm = token.Value<int>("fixed_begin_term"),
+                        FixedTerm = token.Value<int>("fixed_term")
                     };
 
                 case CardUseTimeType.FixedTimeSpan:
                     return new CardBaseInfoBase.UseTimeFixedTimeSpanInfo
                     {
-                        BeginTimestamp = token.Value<ulong>("begin_timestamp"),
-                        EndTimestamp = token.Value<ulong>("end_timestamp")
+                        BeginTimestamp = token.Value<long>("begin_timestamp"),
+                        EndTimestamp = token.Value<long>("end_timestamp")
                     };
             }
             throw new NotSupportedException("不支持的时间类型：" + type);

@@ -17,7 +17,7 @@ namespace Rabbit.WeiXin.Utility
         /// </summary>
         /// <param name="timestamp">时间戳。</param>
         /// <returns>时间信息。</returns>
-        public static DateTime GetTimeByTimeStamp(ulong timestamp)
+        public static DateTime GetTimeByTimeStamp(long timestamp)
         {
             return StartTime.AddSeconds(timestamp);
         }
@@ -29,8 +29,8 @@ namespace Rabbit.WeiXin.Utility
         /// <returns>时间信息。</returns>
         public static DateTime GetTimeByTimeStampString(string timestampString)
         {
-            ulong timestamp;
-            if (!ulong.TryParse(timestampString, out timestamp))
+            long timestamp;
+            if (!long.TryParse(timestampString, out timestamp))
                 throw new ArgumentNullException("timestampString", "不是一个有效的时间戳。");
             return StartTime.AddSeconds(timestamp);
         }

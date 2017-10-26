@@ -187,7 +187,7 @@ namespace Rabbit.WeiXin.MP.Api.GroupMessage
         /// <summary>
         /// 群发的分组Id，如果为null则向所有组发送。
         /// </summary>
-        public ulong? GroupId { get; set; }
+        public long? GroupId { get; set; }
     }
 
     /// <summary>

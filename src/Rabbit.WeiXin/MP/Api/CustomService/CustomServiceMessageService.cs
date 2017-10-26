@@ -423,7 +423,7 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
     {
         #region Field
 
-        private const ushort ArticleMaxCount = 10;
+        private const short ArticleMaxCount = 10;
 
         #endregion Field
 
@@ -483,11 +483,11 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
         /// <summary>
         /// 文章数量。
         /// </summary>
-        public ushort ArticleCount
+        public short ArticleCount
         {
             get
             {
-                return (ushort)Articles.Length;
+                return (short)Articles.Length;
             }
         }
 

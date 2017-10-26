@@ -38,7 +38,7 @@ namespace Rabbit.WeiXin.MP.Api.Card
         /// <param name="status">支持开发者拉出指定状态的卡券列表，例：仅拉出通过审核的卡券。</param>
         /// <returns>卡券信息。</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="take"/> 等于0或者大于50。</exception>
-        CardListResult GetCardList(uint skip = 0, ushort take = 50, CardStatusEnum[] status = null);
+        CardListResult GetCardList(int skip = 0, short take = 50, CardStatusEnum[] status = null);
 
         /// <summary>
         /// 根据卡券Id获取卡券信息。
@@ -87,7 +87,7 @@ namespace Rabbit.WeiXin.MP.Api.Card
         /// <param name="increaseValue">增加的值。</param>
         /// <param name="reduceValue">减少的值。</param>
         /// <remarks>调用修改库存接口增减某张卡券的库存。</remarks>
-        void UpdateStock(string cardId, uint? increaseValue, uint? reduceValue);
+        void UpdateStock(string cardId, int? increaseValue, int? reduceValue);
 
         /// <summary>
         /// 更新卡券。
@@ -139,7 +139,7 @@ namespace Rabbit.WeiXin.MP.Api.Card
         /// <param name="cardService">卡券服务。</param>
         /// <param name="cardId">卡券Id。</param>
         /// <param name="value">增加的值。</param>
-        public static void IncreaseStock(this ICardService cardService, string cardId, uint value)
+        public static void IncreaseStock(this ICardService cardService, string cardId, int value)
         {
             cardService.NotNull("cardService").UpdateStock(cardId, value, null);
         }
@@ -150,7 +150,7 @@ namespace Rabbit.WeiXin.MP.Api.Card
         /// <param name="cardService">卡券服务。</param>
         /// <param name="cardId">卡券Id。</param>
         /// <param name="value">减少的值。</param>
-        public static void ReduceStock(this ICardService cardService, string cardId, uint value)
+        public static void ReduceStock(this ICardService cardService, string cardId, int value)
         {
             cardService.NotNull("cardService").UpdateStock(cardId, null, value);
         }
@@ -214,7 +214,7 @@ namespace Rabbit.WeiXin.MP.Api.Card
         /// 指定二维码的有效时间，范围是60 ~ 1800秒。不填默认为永久有效。
         /// </summary>
         [JsonProperty("expire_seconds")]
-        public ushort? ExpireSeconds { get; set; }
+        public short? ExpireSeconds { get; set; }
 
         /// <summary>
         /// 指定下发二维码，生成的二维码随机分配一个code，领取后不可再次扫描。填写true或false。默认false。
@@ -519,7 +519,7 @@ namespace Rabbit.WeiXin.MP.Api.Card
             /// 卡券库存的数量，不支持填写0，上限为100000000。
             /// </summary>
             [Range(0, 100000), JsonProperty("quantity")]
-            public uint? Quantity { get; set; }
+            public int? Quantity { get; set; }
         }
 
         /// <summary>
@@ -560,13 +560,13 @@ namespace Rabbit.WeiXin.MP.Api.Card
             /// Type为FixedTimeSpan时专用，表示起用时间。从1970年1月1日00:00:00至起用时间的秒数，最终需转换为字符串形态传入。（东八区时间，单位为秒）
             /// </summary>
             [JsonProperty("begin_timestamp")]
-            internal ulong BeginTimestamp { get; set; }
+            internal long BeginTimestamp { get; set; }
 
             /// <summary>
             /// Type为FixedTimeSpan时专用，表示结束时间，建议设置为截止日期的23:59:59过期。（东八区时间，单位为秒）
             /// </summary>
             [JsonProperty("end_timestamp")]
-            internal ulong EndTimestamp { get; set; }
+            internal long EndTimestamp { get; set; }
 
             #region Overrides of UseTimeInfo
 
@@ -591,13 +591,13 @@ namespace Rabbit.WeiXin.MP.Api.Card
             /// Type为FixedLong时专用，表示自领取后多少天内有效，领取后当天有效填写0。（单位为天）
             /// </summary>
             [JsonProperty("fixed_term")]
-            public uint FixedTerm { get; set; }
+            public int FixedTerm { get; set; }
 
             /// <summary>
             /// Type为FixedLong时专用，表示自领取后多少天开始生效。（单位为天）
             /// </summary>
             [JsonProperty("fixed_begin_term")]
-            public uint FixedBeginTerm { get; set; }
+            public int FixedBeginTerm { get; set; }
 
             #region Overrides of UseTimeInfo
 
@@ -802,7 +802,7 @@ namespace Rabbit.WeiXin.MP.Api.Card
         /// 每人可领券的数量限制。
         /// </summary>
         [JsonProperty("get_limit")]
-        public uint GetLimit { get; set; }
+        public int GetLimit { get; set; }
 
         /// <summary>
         /// 卡券领取页面是否可分享。
@@ -900,13 +900,13 @@ namespace Rabbit.WeiXin.MP.Api.Card
         /// 表示起用金额。（单位为分）
         /// </summary>
         [JsonProperty("least_cost")]
-        public uint LeastCost { get; set; }
+        public int LeastCost { get; set; }
 
         /// <summary>
         /// 表示减免金额。（单位为分）
         /// </summary>
         [JsonProperty("reduce_cost")]
-        public uint ReduceCost { get; set; }
+        public int ReduceCost { get; set; }
     }
 
     /// <summary>
@@ -931,7 +931,7 @@ namespace Rabbit.WeiXin.MP.Api.Card
         /// 折扣券专用，表示打折额度（百分比）。填30就是七折。
         /// </summary>
         [JsonProperty("discount")]
-        public ushort Discount { get; set; }
+        public short Discount { get; set; }
     }
 
     /// <summary>

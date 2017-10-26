@@ -18,7 +18,7 @@ namespace Rabbit.WeiXin.Handlers.Impl
         /// <param name="uri">代理Uri（绝对的Url地址）。</param>
         /// <param name="retryCount">重试次数。</param>
         /// <param name="timeout">每次请求超时时间（毫秒）。</param>
-        public AgentRequestModel(Uri uri, ushort retryCount = 3, ushort timeout = 5000)
+        public AgentRequestModel(Uri uri, short retryCount = 3, short timeout = 5000)
         {
             uri.NotNull("uri");
 
@@ -41,12 +41,12 @@ namespace Rabbit.WeiXin.Handlers.Impl
         /// <summary>
         /// 重试次数。
         /// </summary>
-        public ushort RetryCount { get; private set; }
+        public short RetryCount { get; private set; }
 
         /// <summary>
         /// 每次请求超时时间（毫秒）。
         /// </summary>
-        public ushort Timeout { get; private set; }
+        public short Timeout { get; private set; }
     }
 
     /// <summary>

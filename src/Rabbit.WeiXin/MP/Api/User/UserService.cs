@@ -195,7 +195,7 @@ namespace Rabbit.WeiXin.MP.Api.User
         /// 用户的性别，值为1时是男性，值为2时是女性，值为0时是未知
         /// </summary>
         [JsonProperty("sex")]
-        internal ushort SexNumber { get; set; }
+        internal short SexNumber { get; set; }
 
         /// <summary>
         /// 用户的性别。
@@ -255,7 +255,7 @@ namespace Rabbit.WeiXin.MP.Api.User
         /// <summary>
         /// 用户所在的分组ID
         /// </summary>
-        public ulong GroupId { get; set; }
+        public long GroupId { get; set; }
     }
 
     /// <summary>
@@ -266,12 +266,12 @@ namespace Rabbit.WeiXin.MP.Api.User
         /// <summary>
         /// 关注该公众账号的总用户数
         /// </summary>
-        public ulong TotalCount { get; set; }
+        public long TotalCount { get; set; }
 
         /// <summary>
         /// 拉取的OPENID个数，最大值为10000
         /// </summary>
-        public ushort Count { get; set; }
+        public short Count { get; set; }
 
         /// <summary>
         /// 列表数据，OPENID的列表
@@ -288,8 +288,8 @@ namespace Rabbit.WeiXin.MP.Api.User
             var array = (obj["data"]["openid"] as JArray);
             return new GetUserListResultModel
             {
-                TotalCount = obj.Value<ulong>("total"),
-                Count = obj.Value<ushort>("count"),
+                TotalCount = obj.Value<long>("total"),
+                Count = obj.Value<short>("count"),
                 LastOpenId = obj.Value<string>("next_openid"),
                 OpenIds = array == null ? new string[0] : array.Select(i => i.Value<string>()).ToArray(),
             };

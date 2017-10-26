@@ -238,7 +238,7 @@ namespace Rabbit.WeiXin.MP.Api.QrCode
             public sealed class SceneIdInfo
             {
                 [JsonProperty("scene_id")]
-                public uint SceneId { get; set; }
+                public int SceneId { get; set; }
             }
 
             public sealed class SceneStringInfo
@@ -261,7 +261,7 @@ namespace Rabbit.WeiXin.MP.Api.QrCode
         /// 场景值ID，临时二维码时为32位非0整型，永久二维码时最大值为100000（目前参数只支持1--100000）
         /// </summary>
         [JsonIgnore]
-        public virtual uint SceneId
+        public virtual int SceneId
         {
             get
             {
@@ -292,7 +292,7 @@ namespace Rabbit.WeiXin.MP.Api.QrCode
         /// </summary>
         /// <param name="sceneId">数字型的场景Id。</param>
         /// <param name="expireSeconds">该二维码有效时间，以秒为单位。 最大不超过604800（即7天）。</param>
-        public CreateTemporaryQrCodeModel(uint sceneId, uint expireSeconds = 604800)
+        public CreateTemporaryQrCodeModel(int sceneId, int expireSeconds = 604800)
             : base(QrCodeType.Temporary)
         {
             ActionInfo = new QrCodeInfo
@@ -303,13 +303,13 @@ namespace Rabbit.WeiXin.MP.Api.QrCode
             ExpireSeconds = expireSeconds;
         }
 
-        private uint _expireSeconds;
+        private int _expireSeconds;
 
         /// <summary>
         /// 该二维码有效时间，以秒为单位。 最大不超过2592000（即30天）。
         /// </summary>
         [JsonProperty("expire_seconds"), Range(0, 2592000)]
-        public uint ExpireSeconds
+        public int ExpireSeconds
         {
             get { return _expireSeconds; }
             set
@@ -330,7 +330,7 @@ namespace Rabbit.WeiXin.MP.Api.QrCode
         /// 初始化一个新的创建永久二维码模型。
         /// </summary>
         /// <param name="sceneId">数字型的场景Id。</param>
-        public CreateForeverQrCodeModel(uint sceneId)
+        public CreateForeverQrCodeModel(int sceneId)
             : base(QrCodeType.Forever)
         {
             ActionInfo = new QrCodeInfo
@@ -381,7 +381,7 @@ namespace Rabbit.WeiXin.MP.Api.QrCode
         /// 该二维码有效时间，以秒为单位。 最大不超过604800（即7天）。
         /// </summary>
         [JsonProperty("expire_seconds"), Range(0, 604800)]
-        public uint ExpireSeconds { get; set; }
+        public int ExpireSeconds { get; set; }
 
         /// <summary>
         /// 二维码图片解析后的地址，开发者可根据该地址自行生成需要的二维码图片.

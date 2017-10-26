@@ -443,7 +443,7 @@ namespace Rabbit.WeiXin.MP.Api.Material
         /// 希望得到多少条数据。
         /// </summary>
         [JsonProperty("count")]
-        public ushort Take { get; set; }
+        public short Take { get; set; }
     }
 
     /// <summary>
@@ -455,25 +455,25 @@ namespace Rabbit.WeiXin.MP.Api.Material
         /// 语音素材数量。
         /// </summary>
         [JsonProperty("voice_count")]
-        public uint VoiceCount { get; set; }
+        public int VoiceCount { get; set; }
 
         /// <summary>
         /// 视频素材数量。
         /// </summary>
         [JsonProperty("video_count")]
-        public uint VideoCount { get; set; }
+        public int VideoCount { get; set; }
 
         /// <summary>
         /// 图片素材数量。
         /// </summary>
         [JsonProperty("image_count")]
-        public uint ImageCount { get; set; }
+        public int ImageCount { get; set; }
 
         /// <summary>
         /// 图文素材数量。
         /// </summary>
         [JsonProperty("news_count")]
-        public uint NewsCount { get; set; }
+        public int NewsCount { get; set; }
     }
 
     /// <summary>
@@ -514,7 +514,7 @@ namespace Rabbit.WeiXin.MP.Api.Material
             get { return IsShowConverPictureNumber == 1; }
             set
             {
-                IsShowConverPictureNumber = value ? (ushort)1 : (ushort)0;
+                IsShowConverPictureNumber = value ? (short)1 : (short)0;
             }
         }
 
@@ -522,7 +522,7 @@ namespace Rabbit.WeiXin.MP.Api.Material
         /// 是否显示封面
         /// </summary>
         [JsonProperty("show_cover_pic")]
-        internal ushort IsShowConverPictureNumber { get; set; }
+        internal short IsShowConverPictureNumber { get; set; }
 
         /// <summary>
         /// 图文消息的具体内容，支持HTML标签，必须少于2万字符，小于1M，且此处会去除JS

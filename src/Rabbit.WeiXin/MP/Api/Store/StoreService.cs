@@ -119,7 +119,7 @@ namespace Rabbit.WeiXin.MP.Api.Store
         /// 人均价格，大于0的整数。
         /// </summary>
         [JsonProperty("avg_price")]
-        public uint AvgPrice { get; set; }
+        public int AvgPrice { get; set; }
     }
 
     /// <summary>
@@ -228,7 +228,7 @@ namespace Rabbit.WeiXin.MP.Api.Store
         /// 门店Id。
         /// </summary>
         [JsonProperty("poi_id")]
-        public ulong? StoreId { get; set; }
+        public long? StoreId { get; set; }
 
         /// <summary>
         /// 门店状态数字。
@@ -278,7 +278,7 @@ namespace Rabbit.WeiXin.MP.Api.Store
         /// 门店Id。
         /// </summary>
         [JsonProperty("poi_id")]
-        public ulong? StoreId { get; set; }
+        public long? StoreId { get; set; }
     }
 
     /// <summary>
@@ -304,7 +304,7 @@ namespace Rabbit.WeiXin.MP.Api.Store
         /// </summary>
         /// <param name="storeId">门店Id（服务器推送的数据）。</param>
         /// <returns>门店信息。</returns>
-        StoreInfoModel Get(ulong storeId);
+        StoreInfoModel Get(long storeId);
 
         /// <summary>
         /// 获取门店列表。
@@ -312,14 +312,14 @@ namespace Rabbit.WeiXin.MP.Api.Store
         /// <param name="skip">跳过多少条数据。</param>
         /// <param name="take">获取多少条数据（最大为50）。</param>
         /// <returns>门店信息数组。</returns>
-        StoreInfoModel[] GetList(uint skip = 0, ushort take = 20);
+        StoreInfoModel[] GetList(int skip = 0, short take = 20);
 
         /// <summary>
         /// 删除门店。
         /// </summary>
         /// <param name="storeId">门店Id。</param>
         /// <remarks>删除已经成功创建的门店。请商户慎重调用该接口，门店信息被删除后，可能会影响其他与门店相关的业务使用，如卡券等。同样，该门店信息也不会在微信的商户详情页显示，不会再推荐入附近功能。</remarks>
-        void Delete(ulong storeId);
+        void Delete(long storeId);
 
         /// <summary>
         /// 更新门店。
@@ -398,7 +398,7 @@ namespace Rabbit.WeiXin.MP.Api.Store
         /// </summary>
         /// <param name="storeId">门店Id（服务器推送的数据）。</param>
         /// <returns>门店信息。</returns>
-        public StoreInfoModel Get(ulong storeId)
+        public StoreInfoModel Get(long storeId)
         {
             var url = "http://api.weixin.qq.com/cgi-bin/poi/getpoi?access_token=" + _accountModel.GetAccessToken();
 
@@ -417,7 +417,7 @@ namespace Rabbit.WeiXin.MP.Api.Store
         /// <param name="skip">跳过多少条数据。</param>
         /// <param name="take">获取多少条数据（最大为50）。</param>
         /// <returns>门店信息数组。</returns>
-        public StoreInfoModel[] GetList(uint skip = 0, ushort take = 20)
+        public StoreInfoModel[] GetList(int skip = 0, short take = 20)
         {
             var url = "http://api.weixin.qq.com/cgi-bin/poi/getpoilist?access_token=" + _accountModel.GetAccessToken();
             var json = WeiXinHttpHelper.PostString(url, new
@@ -442,7 +442,7 @@ namespace Rabbit.WeiXin.MP.Api.Store
         /// </summary>
         /// <param name="storeId">门店Id。</param>
         /// <remarks>删除已经成功创建的门店。请商户慎重调用该接口，门店信息被删除后，可能会影响其他与门店相关的业务使用，如卡券等。同样，该门店信息也不会在微信的商户详情页显示，不会再推荐入附近功能。</remarks>
-        public void Delete(ulong storeId)
+        public void Delete(long storeId)
         {
             var url = "http://api.weixin.qq.com/cgi-bin/poi/delpoi?access_token=" + _accountModel.GetAccessToken();
 

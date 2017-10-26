@@ -141,7 +141,7 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
 
             return array.Select(i => new CustomServiceSessionInfo
             {
-                CreateTimestamp = i.Value<ulong>("createtime"),
+                CreateTimestamp = i.Value<long>("createtime"),
                 OpenId = i.Value<string>("openid")
             }).ToArray();
         }
@@ -174,7 +174,7 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
         public sealed class WaitServiceItem
         {
             [JsonProperty("createtime")]
-            internal ulong CreateTimestamp { get; set; }
+            internal long CreateTimestamp { get; set; }
 
             /// <summary>
             /// 用户来访时间。
@@ -200,7 +200,7 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
         /// <summary>
         /// 未接入会话数量。
         /// </summary>
-        public ushort Count { get; set; }
+        public short Count { get; set; }
 
         /// <summary>
         /// 未接入会话列表，最多返回100条数据。
@@ -214,7 +214,7 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
     /// </summary>
     public sealed class CustomServiceSessionInfo
     {
-        internal ulong CreateTimestamp { get; set; }
+        internal long CreateTimestamp { get; set; }
 
         /// <summary>
         /// 会话接入的时间。
@@ -236,7 +236,7 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
     public sealed class UserSessionInfo
     {
         [JsonProperty("createtime")]
-        internal ulong CreateTimestamp { get; set; }
+        internal long CreateTimestamp { get; set; }
 
         /// <summary>
         /// 会话接入的时间。

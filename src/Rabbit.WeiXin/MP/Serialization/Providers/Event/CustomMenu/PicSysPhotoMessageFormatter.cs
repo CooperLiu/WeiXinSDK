@@ -18,7 +18,7 @@ namespace Rabbit.WeiXin.MP.Serialization.Providers.Event.CustomMenu
             return SetBaseInfo(container, new PicSysPhotoMessage
             {
                 EventKey = GetValue(container, "EventKey"),
-                Count = GetUShort(info, "Count"),
+                Count = Getshort(info, "Count"),
                 PictureMd5List = info.Element("PicList").Elements().Select(i => GetValue(i, "PicMd5Sum")).ToArray()
             });
         }

@@ -328,10 +328,10 @@ namespace Rabbit.WeiXin.Tests
             Assert.Equal(EventType.MassSendJobFinish, model.EventType);
             Assert.Equal(1988, model.MessageId);
             Assert.Equal(MassSendStatus.Success, model.Status);
-            Assert.Equal((ulong)100, model.TotalCount);
-            Assert.Equal((ulong)80, model.FilterCount);
-            Assert.Equal((ulong)75, model.SentCount);
-            Assert.Equal((ulong)5, model.ErrorCount);
+            Assert.Equal((long)100, model.TotalCount);
+            Assert.Equal((long)80, model.FilterCount);
+            Assert.Equal((long)75, model.SentCount);
+            Assert.Equal((long)5, model.ErrorCount);
         }
 
         #region CustomMenu
@@ -547,7 +547,7 @@ namespace Rabbit.WeiXin.Tests
 
             Assert.Equal(23, model.X);
             Assert.Equal(113, model.Y);
-            Assert.Equal((uint)15, model.Scale);
+            Assert.Equal((int)15, model.Scale);
             Assert.Equal(" 广州市海珠区客村艺苑路 106号", model.Label);
             Assert.Equal("test", model.Poiname);
         }

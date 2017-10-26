@@ -16,7 +16,7 @@ namespace Rabbit.WeiXin.MP.Serialization.Providers.Event.CustomMenu
                 EventKey = GetValue(container, "EventKey"),
                 X = GetDouble(info, "Location_X"),
                 Y = GetDouble(info, "Location_Y"),
-                Scale = GetUInt(info, "Scale"),
+                Scale = Getint(info, "Scale"),
                 Label = GetValue(info, "Label"),
                 Poiname = GetValue(info, "Poiname")
             });

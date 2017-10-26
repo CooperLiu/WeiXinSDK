@@ -29,34 +29,34 @@ namespace Rabbit.WeiXin.MP.Api.User
         /// </summary>
         /// <param name="openId">用户唯一标识符。</param>
         /// <returns>分组Id。</returns>
-        ulong GetGroupByOpenId(string openId);
+        long GetGroupByOpenId(string openId);
 
         /// <summary>
         /// 修改分组名称。
         /// </summary>
         /// <param name="groupId">分组Id。</param>
         /// <param name="name">分组名称（30字以内）</param>
-        void ModifyGroupName(ulong groupId, string name);
+        void ModifyGroupName(long groupId, string name);
 
         /// <summary>
         /// 移动用户分组。
         /// </summary>
         /// <param name="openId">用户唯一标识符。</param>
         /// <param name="toGroupId">新分组的Id。</param>
-        void MoveUserGroup(string openId, ulong toGroupId);
+        void MoveUserGroup(string openId, long toGroupId);
 
         /// <summary>
         /// 批量移动用户分组。
         /// </summary>
         /// <param name="openIds">用户唯一标识符openid的列表（size不能超过50）</param>
         /// <param name="toGroupId">新分组的Id。</param>
-        void MoveUsersGroup(string[] openIds, ulong toGroupId);
+        void MoveUsersGroup(string[] openIds, long toGroupId);
 
         /// <summary>
         /// 删除分组（删除分组后，所有该分组内的用户自动进入默认分组）。
         /// </summary>
         /// <param name="groupId">分组Id。</param>
-        void Delete(ulong groupId);
+        void Delete(long groupId);
     }
 
     /// <summary>
@@ -120,13 +120,13 @@ namespace Rabbit.WeiXin.MP.Api.User
 
         /// <param name="openId">用户唯一标识符。</param>
         /// <returns>分组Id。</returns>
-        public ulong GetGroupByOpenId(string openId)
+        public long GetGroupByOpenId(string openId)
         {
             var url = "https://api.weixin.qq.com/cgi-bin/groups/getid?access_token=" + _accountModel.GetAccessToken();
 
             var data = WeiXinHttpHelper.Post(url, new { openid = openId });
             var content = Encoding.UTF8.GetString(data);
-            return JObject.Parse(content).Value<ulong>("groupid");
+            return JObject.Parse(content).Value<long>("groupid");
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Rabbit.WeiXin.MP.Api.User
 
         /// <param name="groupId">分组Id。</param>
         /// <param name="name">分组名称（30字以内）</param>
-        public void ModifyGroupName(ulong groupId, string name)
+        public void ModifyGroupName(long groupId, string name)
         {
             var url = "https://api.weixin.qq.com/cgi-bin/groups/update?access_token=" + _accountModel.GetAccessToken();
 
@@ -148,7 +148,7 @@ namespace Rabbit.WeiXin.MP.Api.User
 
         /// <param name="openId">用户唯一标识符。</param>
         /// <param name="toGroupId">新分组的Id。</param>
-        public void MoveUserGroup(string openId, ulong toGroupId)
+        public void MoveUserGroup(string openId, long toGroupId)
         {
             var url = "https://api.weixin.qq.com/cgi-bin/groups/members/update?access_token=" + _accountModel.GetAccessToken();
 
@@ -161,7 +161,7 @@ namespace Rabbit.WeiXin.MP.Api.User
 
         /// <param name="openIds">用户唯一标识符openid的列表（size不能超过50）</param>
         /// <param name="toGroupId">新分组的Id。</param>
-        public void MoveUsersGroup(string[] openIds, ulong toGroupId)
+        public void MoveUsersGroup(string[] openIds, long toGroupId)
         {
             var url = "https://api.weixin.qq.com/cgi-bin/groups/members/batchupdate?access_token=" + _accountModel.GetAccessToken();
 
@@ -173,7 +173,7 @@ namespace Rabbit.WeiXin.MP.Api.User
         /// </summary>
 
         /// <param name="groupId">分组Id。</param>
-        public void Delete(ulong groupId)
+        public void Delete(long groupId)
         {
             var url = "https://api.weixin.qq.com/cgi-bin/groups/delete?access_token=" + _accountModel.GetAccessToken();
 
@@ -193,7 +193,7 @@ namespace Rabbit.WeiXin.MP.Api.User
         /// <summary>
         /// 分组Id。
         /// </summary>
-        public ulong Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// 分组名称。
@@ -207,7 +207,7 @@ namespace Rabbit.WeiXin.MP.Api.User
                 throw new NotSupportedException("不支持的分组格式。");
             return new CreateGroupResultModel
             {
-                Id = groupObj.Value<ulong>("id"),
+                Id = groupObj.Value<long>("id"),
                 Name = groupObj.Value<string>("name")
             };
         }
@@ -232,7 +232,7 @@ namespace Rabbit.WeiXin.MP.Api.User
         /// 用户数。
         /// </summary>
         [JsonProperty("count")]
-        public uint UserCount { get; set; }
+        public int UserCount { get; set; }
     }
 
     #endregion Help Class

@@ -31,9 +31,9 @@ namespace Rabbit.WeiXin.Tests
             var result = _qrCodeService.CreateTemporary(new CreateTemporaryQrCodeModel(1));
             Assert.NotNull(result);
             Assert.NotNull(result.Ticket);
-            Assert.Equal((uint)604800, result.ExpireSeconds);
+            Assert.Equal((int)604800, result.ExpireSeconds);
             result = _qrCodeService.CreateTemporary(new CreateTemporaryQrCodeModel(1, 61));
-            Assert.Equal((uint)61, result.ExpireSeconds);
+            Assert.Equal((int)61, result.ExpireSeconds);
         }
 
         [Fact]

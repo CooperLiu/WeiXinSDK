@@ -18,7 +18,7 @@
         /// <summary>
         /// 精度，可理解为精度或者比例尺、越精细的话 scale越高。
         /// </summary>
-        public uint Scale { get; set; }
+        public int Scale { get; set; }
 
         /// <summary>
         /// 地理位置的字符串信息。

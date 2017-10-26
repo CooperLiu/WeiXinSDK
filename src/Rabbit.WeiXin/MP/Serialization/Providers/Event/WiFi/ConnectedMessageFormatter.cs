@@ -17,7 +17,7 @@ namespace Rabbit.WeiXin.MP.Serialization.Providers.Event.WiFi
         {
             return SetBaseInfo(container, new ConnectedMessage
             {
-                ConnectTime = DateTimeHelper.GetTimeByTimeStamp(GetULong(container, "ConnectTime")),
+                ConnectTime = DateTimeHelper.GetTimeByTimeStamp(Getlong(container, "ConnectTime")),
                 ShopId = GetValue(container, "ShopId"),
                 DeviceNo = GetValue(container, "DeviceNo")
             });

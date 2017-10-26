@@ -523,7 +523,7 @@ namespace Rabbit.WeiXin.MP.Api.CustomMenu
             var result = Childs?.Concat(menus).ToArray() ?? menus;
 
             var count = result.Count();
-            const ushort maxCount = 5;
+            const short maxCount = 5;
 
             //如果大于5则删掉前几条数据保证最后能取出5条数据，否则直接获取所有的。
             Childs = count > maxCount ? result.Skip(count - maxCount).Take(maxCount).ToArray() : result.ToArray();

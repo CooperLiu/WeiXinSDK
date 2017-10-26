@@ -12,10 +12,10 @@ namespace Rabbit.WeiXin.MP.Serialization.Providers.Event
         {
             var model = SetBaseInfo(container, new MassSendPushMessage
             {
-                TotalCount = GetULong(container, "TotalCount"),
-                FilterCount = GetULong(container, "FilterCount"),
-                SentCount = GetULong(container, "SentCount"),
-                ErrorCount = GetULong(container, "ErrorCount")
+                TotalCount = Getlong(container, "TotalCount"),
+                FilterCount = Getlong(container, "FilterCount"),
+                SentCount = Getlong(container, "SentCount"),
+                ErrorCount = Getlong(container, "ErrorCount")
             });
 
             var status = GetValue(container, "Status");

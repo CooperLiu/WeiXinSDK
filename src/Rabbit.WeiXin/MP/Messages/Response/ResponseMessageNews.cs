@@ -11,7 +11,7 @@ namespace Rabbit.WeiXin.MP.Messages.Response
     {
         #region Field
 
-        private const ushort ArticleMaxCount = 10;
+        private const short ArticleMaxCount = 10;
 
         #endregion Field
 
@@ -75,11 +75,11 @@ namespace Rabbit.WeiXin.MP.Messages.Response
         /// <summary>
         /// 文章数量。
         /// </summary>
-        public ushort ArticleCount
+        public short ArticleCount
         {
             get
             {
-                return (ushort)Articles.Length;
+                return (short)Articles.Length;
             }
         }
 

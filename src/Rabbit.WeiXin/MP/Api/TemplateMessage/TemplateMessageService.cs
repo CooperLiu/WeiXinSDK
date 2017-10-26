@@ -16,7 +16,7 @@ namespace Rabbit.WeiXin.MP.Api.TemplateMessage
         /// <param name="mainIndustryId">主行业Id。</param>
         /// <param name="deputyIndustryid">副行业Id。</param>
         /// <remarks>行业Id参考：http://mp.weixin.qq.com/wiki/17/304c1885ea66dbedf7dc170d84999a9d.html#toc。</remarks>
-        void SetIndustry(uint mainIndustryId, uint deputyIndustryid);
+        void SetIndustry(int mainIndustryId, int deputyIndustryid);
 
         /// <summary>
         /// 获取发送模板的Id。
@@ -34,7 +34,7 @@ namespace Rabbit.WeiXin.MP.Api.TemplateMessage
         /// <param name="topColor">顶部颜色。</param>
         /// <param name="data">模板数据。</param>
         /// <returns>消息Id。</returns>
-        ulong Send(string openId, string templateId, string url, string topColor, object data);
+        long Send(string openId, string templateId, string url, string topColor, object data);
     }
 
     /// <summary>
@@ -69,7 +69,7 @@ namespace Rabbit.WeiXin.MP.Api.TemplateMessage
         /// <param name="mainIndustryId">主行业Id。</param>
         /// <param name="deputyIndustryid">副行业Id。</param>
         /// <remarks>行业Id参考：http://mp.weixin.qq.com/wiki/17/304c1885ea66dbedf7dc170d84999a9d.html#toc。</remarks>
-        public void SetIndustry(uint mainIndustryId, uint deputyIndustryid)
+        public void SetIndustry(int mainIndustryId, int deputyIndustryid)
         {
             var postUrl = "https://api.weixin.qq.com/cgi-bin/template/api_set_industry?access_token=" + _accountModel.GetAccessToken();
             WeiXinHttpHelper.Post(postUrl, new { industry_id1 = mainIndustryId, industry_id2 = deputyIndustryid });
@@ -96,7 +96,7 @@ namespace Rabbit.WeiXin.MP.Api.TemplateMessage
         /// <param name="topColor">顶部颜色。</param>
         /// <param name="data">模板数据。</param>
         /// <returns>消息Id。</returns>
-        public ulong Send(string openId, string templateId, string url, string topColor, object data)
+        public long Send(string openId, string templateId, string url, string topColor, object data)
         {
             var postUrl = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + _accountModel.GetAccessToken();
             var json = WeiXinHttpHelper.PostString(postUrl, new
@@ -107,7 +107,7 @@ namespace Rabbit.WeiXin.MP.Api.TemplateMessage
                 topcolor = topColor,
                 data
             });
-            return JObject.Parse(json).Value<ulong>("msgid");
+            return JObject.Parse(json).Value<long>("msgid");
         }
 
         #endregion Implementation of ITemplateMessageService

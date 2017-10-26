@@ -157,21 +157,21 @@ namespace Rabbit.WeiXin.MP.Serialization
             #endregion By Number
         }
 
-        protected static uint GetUInt(XContainer container, string name)
+        protected static int Getint(XContainer container, string name)
         {
             var value = GetValue(container, name);
-            uint number;
-            if (!uint.TryParse(value, out number))
+            int number;
+            if (!int.TryParse(value, out number))
                 throw new ArgumentException(string.Format("无法将 {0} 转换成int。", value));
 
             return number;
         }
 
-        protected static ushort GetUShort(XContainer container, string name)
+        protected static short Getshort(XContainer container, string name)
         {
             var value = GetValue(container, name);
-            ushort number;
-            if (!ushort.TryParse(value, out number))
+            short number;
+            if (!short.TryParse(value, out number))
                 throw new ArgumentException(string.Format("无法将 {0} 转换成int。", value));
 
             return number;
@@ -207,19 +207,19 @@ namespace Rabbit.WeiXin.MP.Serialization
             return number;
         }
 
-        protected static ulong GetULong(XContainer container, string name)
+        protected static long Getlong(XContainer container, string name)
         {
             var value = GetValue(container, name);
-            ulong number;
-            if (!ulong.TryParse(value, out number))
-                throw new ArgumentException(string.Format("无法将 {0} 转换成ulong。", value));
+            long number;
+            if (!long.TryParse(value, out number))
+                throw new ArgumentException(string.Format("无法将 {0} 转换成long。", value));
 
             return number;
         }
 
         protected static DateTime GetDataTime(XContainer container, string name)
         {
-            return DateTimeHelper.GetTimeByTimeStamp(GetULong(container, "CreateTime"));
+            return DateTimeHelper.GetTimeByTimeStamp(Getlong(container, "CreateTime"));
         }
 
         protected static Uri GetUri(XContainer container, string name)

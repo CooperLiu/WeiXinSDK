@@ -63,7 +63,7 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
         /// <param name="pageIndex">查询第几页，从1开始</param>
         /// <param name="openId">普通用户的标识，对当前公众号唯一</param>
         /// <returns>服务记录数组。</returns>
-        ServiceRecord[] GetRecords(DateTime startTime, DateTime endTime, ushort pageSize = 50, ushort pageIndex = 1, string openId = null);
+        ServiceRecord[] GetRecords(DateTime startTime, DateTime endTime, short pageSize = 50, short pageIndex = 1, string openId = null);
     }
 
     /// <summary>
@@ -178,7 +178,7 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
             {
                 Account = i.Value<string>("kf_account"),
                 HeadPictureUrl = i.Value<string>("kf_headimgurl"),
-                Id = i.Value<ulong>("kf_id"),
+                Id = i.Value<long>("kf_id"),
                 NickName = i.Value<string>("kf_nick"),
             }).ToArray();
         }
@@ -196,10 +196,10 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
             return list.Select(i => new OnlineCustomServiceInfo
             {
                 Account = i.Value<string>("kf_account"),
-                Id = i.Value<ulong>("kf_id"),
-                MaxAutoAcceptNumber = i.Value<uint>("auto_accept"),
-                ServingNumber = i.Value<uint>("accepted_case"),
-                StatusNumber = i.Value<ushort>("status")
+                Id = i.Value<long>("kf_id"),
+                MaxAutoAcceptNumber = i.Value<int>("auto_accept"),
+                ServingNumber = i.Value<int>("accepted_case"),
+                StatusNumber = i.Value<short>("status")
             }).ToArray();
         }
 
@@ -212,7 +212,7 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
         /// <param name="pageIndex">查询第几页，从1开始</param>
         /// <param name="openId">普通用户的标识，对当前公众号唯一</param>
         /// <returns>服务记录数组。</returns>
-        public ServiceRecord[] GetRecords(DateTime startTime, DateTime endTime, ushort pageSize = 50, ushort pageIndex = 1,
+        public ServiceRecord[] GetRecords(DateTime startTime, DateTime endTime, short pageSize = 50, short pageIndex = 1,
             string openId = null)
         {
             if ((endTime - startTime) > TimeSpan.FromDays(1))
@@ -238,9 +238,9 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
             return array.Select(i => new ServiceRecord
             {
                 OpenId = i.Value<string>("openid"),
-                OperCode = i.Value<ushort>("opercode"),
+                OperCode = i.Value<short>("opercode"),
                 Text = i.Value<string>("text"),
-                Timestamp = i.Value<ulong>("time"),
+                Timestamp = i.Value<long>("time"),
                 Account = i.Value<string>("worker")
             }).ToArray();
         }
@@ -278,9 +278,9 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
         /// 2002	客服发送消息
         /// 2003	客服收到消息
         /// </remarks>
-        public ushort OperCode { get; set; }
+        public short OperCode { get; set; }
 
-        internal ulong Timestamp { get; set; }
+        internal long Timestamp { get; set; }
 
         /// <summary>
         /// 操作时间
@@ -330,12 +330,12 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
         /// <summary>
         /// 客服工号
         /// </summary>
-        public ulong Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// 客服在线状态 1：pc在线，2：手机在线。若pc和手机同时在线则为 1+2=3
         /// </summary>
-        internal ushort StatusNumber { get; set; }
+        internal short StatusNumber { get; set; }
 
         /// <summary>
         /// 客服在线状态。
@@ -348,18 +348,18 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
                 Enum.TryParse(StatusNumber.ToString(CultureInfo.InvariantCulture), out value);
                 return value;
             }
-            set { StatusNumber = (ushort)value; }
+            set { StatusNumber = (short)value; }
         }
 
         /// <summary>
         /// 客服设置的最大自动接入数。
         /// </summary>
-        public uint MaxAutoAcceptNumber { get; set; }
+        public int MaxAutoAcceptNumber { get; set; }
 
         /// <summary>
         /// 客服当前正在接待的会话数。
         /// </summary>
-        public uint ServingNumber { get; set; }
+        public int ServingNumber { get; set; }
     }
 
     /// <summary>
@@ -380,7 +380,7 @@ namespace Rabbit.WeiXin.MP.Api.CustomService
         /// <summary>
         /// 客服工号
         /// </summary>
-        public ulong Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// 客服头像。

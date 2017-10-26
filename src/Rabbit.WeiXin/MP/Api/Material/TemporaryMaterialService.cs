@@ -132,7 +132,7 @@ namespace Rabbit.WeiXin.MP.Api.Material
         /// 创建时间戳。
         /// </summary>
         [JsonProperty("created_at")]
-        public ulong CreateTimestamp { get; set; }
+        public long CreateTimestamp { get; set; }
 
         private DateTime? _createTime;
 
