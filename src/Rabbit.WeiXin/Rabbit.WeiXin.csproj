@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>微信开发SDK。</Description>
-    <PackageReleaseNotes>解决读取Response Stream时失败的问题。</PackageReleaseNotes>
+    <PackageReleaseNotes>更换数据类型</PackageReleaseNotes>
     <Copyright>© RabbitHub. All rights reserved.</Copyright>
     <VersionPrefix>0.3</VersionPrefix>
     <Authors>majian;Cooperliu</Authors>
