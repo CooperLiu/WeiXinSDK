@@ -5,7 +5,7 @@
     <PackageReleaseNotes>解决读取Response Stream时失败的问题。</PackageReleaseNotes>
     <Copyright>© RabbitHub. All rights reserved.</Copyright>
     <VersionPrefix>0.3</VersionPrefix>
-    <Authors>Cooperliu</Authors>
+    <Authors>majian;Cooperliu</Authors>
     <TargetFrameworks>net40;net45;netstandard2.0</TargetFrameworks>
     <AssemblyName>Rabbit.WeiXin</AssemblyName>
     <PackageId>Rabbit.WeiXin</PackageId>

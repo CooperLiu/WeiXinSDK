@@ -4,7 +4,7 @@
     <Description>微信开发 SDK 对 MVC 的扩展。</Description>
     <Copyright>© RabbitHub. All rights reserved.</Copyright>
     <VersionPrefix>0.3-beta1</VersionPrefix>
-    <Authors>majian</Authors>
+    <Authors>majian;Cooperliu</Authors>
     <TargetFrameworks>net40;net45;netstandard2.0</TargetFrameworks>
     <AssemblyName>Rabbit.WeiXin.MvcExtension</AssemblyName>
     <PackageId>Rabbit.WeiXin.MvcExtension</PackageId>
@@ -16,7 +16,8 @@
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <Version>0.3</Version>
-    <FileVersion>0.1.0.0</FileVersion>
+    <FileVersion>0.4.0.0</FileVersion>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
