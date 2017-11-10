@@ -285,14 +285,16 @@ namespace Rabbit.WeiXin.MP.Api.User
 
         internal static GetUserListResultModel Create(JObject obj)
         {
-            var array = (obj["data"]["openid"] as JArray);
-            return new GetUserListResultModel
+            var array = obj["data"]?["openid"] as JArray;
+            var model = new GetUserListResultModel
             {
                 TotalCount = obj.Value<long>("total"),
                 Count = obj.Value<short>("count"),
                 LastOpenId = obj.Value<string>("next_openid"),
-                OpenIds = array == null ? new string[0] : array.Select(i => i.Value<string>()).ToArray(),
+                OpenIds = array?.Select(i => i.Value<string>()).ToArray() ?? new string[0],
             };
+
+            return model;
         }
     }
 
