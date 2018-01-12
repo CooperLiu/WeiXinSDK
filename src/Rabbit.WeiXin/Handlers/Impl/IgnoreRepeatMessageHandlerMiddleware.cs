@@ -48,14 +48,12 @@ namespace Rabbit.WeiXin.Handlers.Impl
 
             #region 删除无效的消息标识以节省资源
 
-            for (var i = 0; i < MessageIdentity.Count; i++)
+            //Fixed issues: 集合已修改；可能无法执行枚举操作。
+            var repeatMessageList = MessageIdentity.Where(m => m.Value.AddSeconds(30) < DateTime.Now).ToList();
+
+            foreach (var msg in repeatMessageList)
             {
-                var item = MessageIdentity[i];
-                //消息处理时间大于30秒则删除该条标识。
-                if (item.Value.AddSeconds(30) < DateTime.Now)
-                {
-                    MessageIdentity.Remove(item);
-                }
+                MessageIdentity.Remove(msg);
             }
 
             #endregion 删除无效的消息标识以节省资源
