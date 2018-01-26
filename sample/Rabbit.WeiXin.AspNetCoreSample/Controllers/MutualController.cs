@@ -14,9 +14,9 @@ namespace Rabbit.WeiXin.AspNetCoreSample.Controllers
     {
         public static WeChatConfig Instance { get; } = new WeChatConfig
         {
-            AppId = "appId",
-            EncodingAesKey = "encodingAesKey",
-            Token = "token"
+            AppId = "wxb723ad2b981e6c49",
+            EncodingAesKey = "DBmTwT8HBXM7mJJn8hjm9mxJn88WZ8iHh7nz8jBJmZb",
+            Token = "pYd3AM1Mo1o1zLzoDvM3ZDDQE1pDp1A0"
         };
 
         public string AppId { get; set; }
@@ -29,16 +29,19 @@ namespace Rabbit.WeiXin.AspNetCoreSample.Controllers
         private readonly WeChatConfig _weChatConfig = WeChatConfig.Instance;
 
         [HttpGet]
-        public string Index(string signature, string timestamp, string nonce, string echostr)
+        [Route("MpCallback/Notify")]
+        public ActionResult Index(string signature, string timestamp, string nonce, string echostr)
         {
-            var signatureService = DefaultDependencyResolver.Instance.GetService<ISignatureService>();
-            if (signatureService.Check(signature, timestamp, nonce, _weChatConfig.Token))
-                return echostr;
+            return Content("aaaaaaaaaaa");
+            //var signatureService = DefaultDependencyResolver.Instance.GetService<ISignatureService>();
+            //if (signatureService.Check(signature, timestamp, nonce, _weChatConfig.Token))
+            //    return echostr;
 
-            throw new Exception("非法请求。");
+            //throw new Exception("非法请求。");
         }
 
         [HttpPost]
+        [Route("MpCallback/Notify")]
         public ActionResult Index()
         {
             IHandlerBuilder builder = new HandlerBuilder();

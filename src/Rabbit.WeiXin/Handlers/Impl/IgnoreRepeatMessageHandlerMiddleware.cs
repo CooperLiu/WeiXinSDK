@@ -48,6 +48,8 @@ namespace Rabbit.WeiXin.Handlers.Impl
 
             #region 删除无效的消息标识以节省资源
 
+
+
             //Fixed issues: 集合已修改；可能无法执行枚举操作。
             var repeatMessageList = MessageIdentity.Where(m => m.Value.AddSeconds(30) < DateTime.Now).ToList();
 
@@ -56,10 +58,13 @@ namespace Rabbit.WeiXin.Handlers.Impl
                 MessageIdentity.Remove(msg);
             }
 
+            var cacheMessages = MessageIdentity.ToList();
+
+
             #endregion 删除无效的消息标识以节省资源
 
             //如果消息已经被标识为处理则跳过。
-            if (MessageIdentity.Any(i => i.Key == identity))
+            if (cacheMessages.Any(i => i.Key == identity))
                 return EmptyHandlerMiddleware.Instance.Invoke(context);
 
             //标识消息正在处理。
