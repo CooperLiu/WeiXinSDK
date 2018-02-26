@@ -2,6 +2,7 @@
 using Rabbit.WeiXin.MP.Messages.Request;
 using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace Rabbit.WeiXin.Handlers.Impl
     {
         #region Field
 
-        private static readonly IList<KeyValuePair<string, DateTime>> MessageIdentity = new List<KeyValuePair<string, DateTime>>();
+        private static readonly ConcurrentDictionary<string, DateTime> MessageIdentityCache = new ConcurrentDictionary<string, DateTime>();
 
         #endregion Field
 
@@ -46,30 +47,36 @@ namespace Rabbit.WeiXin.Handlers.Impl
             //得到消息的唯一标识。
             var identity = GetMessageIdentity(requestMessage);
 
-            #region 删除无效的消息标识以节省资源
-
-
-
-            //Fixed issues: 集合已修改；可能无法执行枚举操作。
-            var repeatMessageList = MessageIdentity.Where(m => m.Value.AddSeconds(30) < DateTime.Now).ToList();
-
-            foreach (var msg in repeatMessageList)
+            try
             {
-                MessageIdentity.Remove(msg);
+
+                #region 删除无效的消息标识以节省资源
+
+                //Fixed issues: 集合已修改；可能无法执行枚举操作。
+                var repeatMessageList = MessageIdentityCache.Where(m => m.Value.AddSeconds(30) < DateTime.Now).ToList();
+
+                foreach (var msg in repeatMessageList)
+                {
+                    DateTime value;
+                    MessageIdentityCache.TryRemove(msg.Key, out value);
+                }
+
+                #endregion 删除无效的消息标识以节省资源
+
+                var cacheMessages = MessageIdentityCache.ToList();
+
+                //如果消息已经被标识为处理则跳过。
+                if (cacheMessages.Any(i => i.Key == identity))
+                    return EmptyHandlerMiddleware.Instance.Invoke(context);
+
+                //标识消息正在处理。
+                MessageIdentityCache.TryAdd(identity, DateTime.Now);
+
             }
-
-            var cacheMessages = MessageIdentity.ToList();
-
-
-            #endregion 删除无效的消息标识以节省资源
-
-            //如果消息已经被标识为处理则跳过。
-            if (cacheMessages.Any(i => i.Key == identity))
+            catch
+            {
                 return EmptyHandlerMiddleware.Instance.Invoke(context);
-
-            //标识消息正在处理。
-            MessageIdentity.Add(new KeyValuePair<string, DateTime>(identity, DateTime.Now));
-
+            }
             return Next.Invoke(context);
         }
 

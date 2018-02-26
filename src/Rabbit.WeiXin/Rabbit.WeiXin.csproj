@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>微信开发SDK</Description>
-    <PackageReleaseNotes>Fixed issues: 重复消息检测，移除过期消息</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed issues: 重复消息检测，移除过期消息，数组越界</PackageReleaseNotes>
     <Copyright>© RabbitHub. All rights reserved.</Copyright>
     <VersionPrefix>0.3</VersionPrefix>
     <Authors>majian;Cooperliu</Authors>
@@ -16,9 +16,9 @@
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <AssemblyVersion>0.3.4.8</AssemblyVersion>
-    <FileVersion>0.3.4.8</FileVersion>
-    <Version>0.3.4.8</Version>
+    <AssemblyVersion>0.3.4.9</AssemblyVersion>
+    <FileVersion>0.3.4.9</FileVersion>
+    <Version>0.3.4.9</Version>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Rabbit.WeiXin.Tests
@@ -10,12 +12,32 @@ namespace Rabbit.WeiXin.Tests
     {
         private static readonly IList<KeyValuePair<string, DateTime>> MessageIdentity = new List<KeyValuePair<string, DateTime>>();
 
+        private static Random random;
+
         [Fact]
         public void MessageCollection_Test()
         {
-            for (int i = 0; i < 8; i++)
+            Task t1 = Task.Factory.StartNew(TestCase);
+            Task t2 = Task.Factory.StartNew(TestCase);
+            Task t3 = Task.Factory.StartNew(TestCase);
+            Task t4 = Task.Factory.StartNew(TestCase);
+
+            Task.WaitAll(t1, t2, t3, t4);
+        }
+
+        private void TestCase()
+        {
+            random = new Random(1000);
+
+            for (int i = 0; i < 200; i++)
             {
-                IgnoreRepeatMessageHandler($"User{i}", DateTime.Now.AddSeconds(-i));
+                var rnd = random.Next();
+                var rndIndex = rnd % 2;
+                if (rndIndex == 0)
+                {
+                    IgnoreRepeatMessageHandler($"User{rndIndex}", DateTime.Now.AddMilliseconds(-500));
+                }
+
             }
         }
 
